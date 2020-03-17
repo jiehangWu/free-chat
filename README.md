@@ -1,2 +1,2 @@
 # free-chat
-This is develop branch.
+This is the develop branch.
