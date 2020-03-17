@@ -1,0 +1,22 @@
+{
+  "name": "free-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiehangWu/free-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiehangWu/free-chat/issues"
+  },
+  "homepage": "https://github.com/jiehangWu/free-chat#readme",
+  "dependencies": {
+    "restify": "^8.5.1"
+  }
+}
