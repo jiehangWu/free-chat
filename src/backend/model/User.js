@@ -5,9 +5,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
+    messages: [
+        {
+            type: mongoose.Schema.Types.ObjectID,
+            ref: "Message"
+        }
+    ]
 });
 
 // this is where to put middlewares
 
-mongoose.model("users", userSchema);
+const User = mongoose.model("User", userSchema);
+module.exports = User;
 
