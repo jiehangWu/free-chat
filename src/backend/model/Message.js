@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const messageSchema = new mongoose.Schema({
+const MessageSchema = new mongoose.Schema({
     content: String,
     sendTime: Date
 });
 
 // this is where to put middlewares
 
-const Message = mongoose.model("Message", messageSchema);
+const Message = mongoose.model("Message", MessageSchema);
 module.exports = Message;
