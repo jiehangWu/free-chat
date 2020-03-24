@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
@@ -14,7 +14,10 @@ const userSchema = new mongoose.Schema({
 });
 
 // this is where to put middlewares
+const User = mongoose.model("User", UserSchema);
 
-const User = mongoose.model("User", userSchema);
+
+
+
 module.exports = User;
 
