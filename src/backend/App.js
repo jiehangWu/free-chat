@@ -3,8 +3,8 @@ const cookieSession = require("cookie-session");
 const mongoose = require("mongoose");
 require("./model/User");
 require("./model/Message");
-const indexRoutes = require("./routes/index");
-const userRoutes = require("./routes/user");
+
+const routes = require("./routes/router");
 // const server = require("http").Server(app);
 // const io = require("socket.io")(server);
 const key = require("./secret/key");
@@ -22,8 +22,7 @@ const PORT = 3000 || process.env.PORT;
 
 mongoose.connect(key.MONGO_URI, { useNewUrlParser: true });
 
-app.use("/", indexRoutes)
-app.use("/login", userRoutes);
+app.use("/", routes)
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
