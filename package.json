@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/backend/App.js"
+    "start": "nodemon src/backend/App.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/jiehangWu/free-chat#readme",
   "dependencies": {
+    "cookie-session": "^1.4.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.5"
+    "mongoose": "^5.9.5",
+    "nodemon": "^2.0.2",
+    "socket.io": "^2.3.0"
   }
 }

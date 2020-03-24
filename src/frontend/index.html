@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  const cleanInput = (input) => {
+    return $("<div/>").text(input).html();
+  }
+
+  const sendMessage = () => {
+    const message = "This is a new message";
+    message = cleanInput(message);
+    socket.emit("new message", message);
+  };
+
+  socket.on("new message", () => {
+    sendMessage();
+  });
+</script>
+<h1>Hello there</h1>
+<div>Display new message here</div>
+</html>
