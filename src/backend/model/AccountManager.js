@@ -1,15 +1,16 @@
-const User = require("User");
+const mongoose = require("mongoose");
 
-login = async function (username) {
-    return await User.exists({username: username});
+const User = mongoose.model("users");
+module.exports = {
+    login: async function (username) {
+        return await User.findOne({username: username});
+    },
+
+    register: async function (username) {
+       const user = await new User( {username: username} );
+       user.save((err) => {
+           console.log(err);
+       });
+    }
 }
 
-register = function (username) {
-    User.init().then(function () {
-        User.create({username: username}, function (err) {
-            throw new Error(err);
-        })
-    })
-}
-
-export {login, register};

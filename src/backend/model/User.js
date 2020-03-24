@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 // this is where to put middlewares
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("users", UserSchema);
 
 module.exports = User;
 

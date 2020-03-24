@@ -3,7 +3,11 @@ const router = express.Router();
 const accountManager = require("../model/AccountManager");
 
 router.post("/login", (req, res) => {
-    exist = await accountManager.login(req.body.username);
+    let exist = false;
+    async () => {
+      exist = await accountManager.login(req.username);
+    }
+  
     if (exist) {
       // go to chatroom
       res.redirect("/");
@@ -14,7 +18,7 @@ router.post("/login", (req, res) => {
 
 router.post("/register", (req, res) => {
   try {
-    accountManager.register(req.body.username);
+    accountManager.register(req.username);
   } catch(err) {
     console.log(err);
   }
