@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/backend/App.js"
+    "start": "node src/backend/App.js",
+    "run": "nodemon src/backend/App.js"
   },
   "repository": {
     "type": "git",

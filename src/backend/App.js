@@ -22,7 +22,7 @@ const PORT = 3000 || process.env.PORT;
 
 mongoose.connect(key.MONGO_URI, { useNewUrlParser: true });
 
-app.use("/", routes)
+app.use("/", routes);
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);

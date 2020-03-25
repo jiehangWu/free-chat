@@ -1,7 +1,6 @@
 const path = require("path");
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const accountManager = require("../model/AccountManager");
 
 /* GET home page. */
