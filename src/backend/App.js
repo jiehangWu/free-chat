@@ -1,15 +1,20 @@
 const express = require("express");
-const cookieSession = require("cookie-session");
 const mongoose = require("mongoose");
+const key = require("./secret/key");
 require("./model/User");
 require("./model/Message");
 
-const routes = require("./routes/router");
-// const server = require("http").Server(app);
-// const io = require("socket.io")(server);
-const key = require("./secret/key");
-
 app = express();
+mongoose.connect(key.MONGO_URI_MY, { useNewUrlParser: true });
+
+const cookieSession = require("cookie-session");
+const bodyParser = require("body-parser");
+
+const path = require("path");
+
+const routes = require("./routes/router");
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 
 app.use(
     cookieSession({
@@ -20,11 +25,12 @@ app.use(
 
 const PORT = 3000 || process.env.PORT;
 
-mongoose.connect(key.MONGO_URI, { useNewUrlParser: true });
-
+app.use(bodyParser.text());
 app.use("/", routes);
+app.use("/static", express.static(path.join(__dirname, "../frontend")));
 
-app.listen(PORT, () => {
+
+server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });
 

@@ -9,28 +9,16 @@ router.get('/', function (req, res) {
 });
 
 
-router.get("/login/:username", (req, res, next) => {
-  // TODO: Refactor this to async/await
-  accountManager.login(req.params.username)
-    .then((result) => {
-      if (result !== null) {
-        res.redirect("/");
-      } else {
-        res.redirect(`/register/:${req.params.username}`);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.post("/login", (req, res, next) => {
+  const username = req.body;
 
-router.post("/register/:username", (req, res, next) => {
-  try {
-    accountManager.register(req.params.username);
-  } catch(err) {
-    console.log(err);
-  }
-  res.redirect("/");
+  accountManager.login(username)
+    .then((result) => {
+      if (result === null) {
+        accountManager.register(username);
+      }
+      res.redirect("/");
+    });  
 });
 
 module.exports = router;
