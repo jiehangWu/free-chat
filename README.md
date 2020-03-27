@@ -1,2 +1,2 @@
 # free-chat
-# Starting template
+This is the develop branch.
