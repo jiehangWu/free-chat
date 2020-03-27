@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const router = express.Router();
-const accountManager = require("../model/AccountManager");
+const dataController = require("../model/DataController");
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -12,14 +12,26 @@ router.get('/', function (req, res) {
 router.post("/login", (req, res, next) => {
   const username = req.body;
 
-  accountManager.login(username)
+  dataController.login(username)
     .then((result) => {
       if (result === null) {
-        accountManager.register(username);
+        dataController.register(username);
       }
       res.redirect("/");
-    });  
+    });
 });
+
+router.post("/save", (req, res, next) => {
+  const data = req.body;
+
+  dataController.saveMessage(data.username, data.content)
+    .catch(err => {
+      console.log(err);
+    });
+
+  res.redirect("/");
+});
+
 
 module.exports = router;
 
