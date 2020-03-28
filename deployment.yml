@@ -2,13 +2,15 @@ kind: Service
 apiVersion: v1
 metadata:
     name: freechat-service
+    labels:
+        app: freechat
 spec:
     selector:
         app: freechat
     ports:
-      - protocol: "TCP"
+      - protocol: TCP
         # port accessible inside cluster
-        port: 3000
+        port: 80
         # port to foward to inside the pod
         targetPort: 3000
         nodePort: 30000
@@ -23,7 +25,7 @@ metadata:
     labels:
         app: freechat
 spec:
-    replicas: 5
+    replicas: 2
     selector:
         matchLabels:
             app: freechat
@@ -34,6 +36,25 @@ spec:
         spec:
             containers:
               - name: freechat
-                image: jiewuu/freechat:1.1
+                image: jiewuu/freechat:1.0
+                imagePullPolicy: Always
                 ports:
-                - containerPort: 3000
+                - containerPort: 80
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: freechat-ingress
+spec:
+    tls:
+    - hosts:
+        - freechat-service
+    rules:
+    - host: freechat-service
+      http:
+        paths:
+            - path: /login
+              backend:
+                serviceName: freechat-service
+                servicePort: 3000
