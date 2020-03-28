@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const key = require("./secret/key");
+// const cors = require("cors");
 require("./model/User");
 require("./model/Message");
 
@@ -16,6 +17,7 @@ const routes = require("./routes/router");
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
+// app.use(cors());
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 10000,
@@ -29,8 +31,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use("/", routes);
 app.use("/static", express.static(path.join(__dirname, "../frontend")));
-
-
+ 
 server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });

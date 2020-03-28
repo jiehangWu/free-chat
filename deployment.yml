@@ -1,0 +1,43 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: freechat-service
+    labels:
+        app: freechat
+spec:
+    selector:
+        app: freechat
+    ports:
+      - protocol: TCP
+        # port accessible inside cluster
+        port: 80
+        # port to foward to inside the pod
+        targetPort: 3000
+        nodePort: 30000
+    type: NodePort
+     
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: freechat-deployment
+    labels:
+        app: freechat
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: freechat
+    template:
+        metadata:
+            labels:
+                app: freechat
+        spec:
+            containers:
+              - name: freechat
+                image: jiewuu/freechat:1.1
+                imagePullPolicy: Always
+                ports:
+                - containerPort: 80
+
