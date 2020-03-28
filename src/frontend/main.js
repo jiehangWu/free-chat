@@ -1,6 +1,6 @@
 $(function () {
     const FADE_TIME = 150;
-    
+    const URL = document.location.href;
     var $window = $(window);
     var $usernameInput = $(".usernameInput");
     var $inputMessage = $(".inputMessage");
@@ -14,7 +14,7 @@ $(function () {
     var connected = false;
     var $currentInput = $usernameInput.focus();
 
-    var socket = io.connect("http://localhost:3000");
+    var socket = io.connect(URL);
 
     const setUsername = () => {
         username = $usernameInput.val();
@@ -87,7 +87,8 @@ $(function () {
 
     const ajaxLogin = () => {
         $.ajax({
-            url: "http://localhost:3000/login",
+            url: `${URL}login`,
+            crossDomain: true,
             type: "POST",
             data: $usernameInput.val(),
             contentType: "text/plain",
@@ -107,7 +108,8 @@ $(function () {
     const ajaxSaveMessage = (username, content) => {
         const data = JSON.stringify({ "username": username, "content": content });
         $.ajax({
-            url: "http://localhost:3000/save",
+            url: `${URL}save`,
+            crossDomain: true,
             type: "POST",
             data: data,
             contentType: "application/json",

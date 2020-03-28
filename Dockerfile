@@ -1,14 +1,15 @@
 FROM node:current-slim
 
-WORKDIR /free-chat
+WORKDIR /usr/src/app
 
 COPY package.json .
+COPY package-lock.json .
 
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 3000
 
-CMD ["npm", "start", "run"]
+CMD ["npm", "start"]
 
 COPY . .
 
