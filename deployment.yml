@@ -36,25 +36,8 @@ spec:
         spec:
             containers:
               - name: freechat
-                image: jiewuu/freechat:1.0
+                image: jiewuu/freechat:1.1
                 imagePullPolicy: Always
                 ports:
                 - containerPort: 80
 
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-    name: freechat-ingress
-spec:
-    tls:
-    - hosts:
-        - freechat-service
-    rules:
-    - host: freechat-service
-      http:
-        paths:
-            - path: /login
-              backend:
-                serviceName: freechat-service
-                servicePort: 3000

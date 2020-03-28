@@ -14,7 +14,7 @@ $(function () {
     var connected = false;
     var $currentInput = $usernameInput.focus();
 
-    var socket = io();
+    var socket = io.connect(URL);
 
     const setUsername = () => {
         username = $usernameInput.val();
